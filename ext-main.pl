@@ -31,6 +31,12 @@ $handle=sub{
 		$flag=1;
 	}
 
+	if("${dtext}" eq 'ゆれ'){
+		$str="ゆれ";
+		&updatest($str);
+		$flag=1;
+	}
+
 	if("${flag}" eq 1){
 		&defaulthandle($ref);
 	}
