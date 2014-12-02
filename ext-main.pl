@@ -25,12 +25,6 @@ $handle=sub{
 		$flag=1;
 	}
 
-	if("${dtext}" eq 'まれいたそ〜'){
-		$str="まれいたそ〜";
-		&updatest($str);
-		$flag=1;
-	}
-
 	if("${dtext}" eq 'ゆれ'){
 		$str="ゆれ";
 		&updatest($str);
