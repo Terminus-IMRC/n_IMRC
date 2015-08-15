@@ -1,4 +1,7 @@
 use utf8;
+use MIME::Base64;
+use Encode;
+use warnings;
 
 $handle=sub{
 	$flag=0;
@@ -29,6 +32,19 @@ $handle=sub{
 		$str="ゆれ";
 		&updatest($str);
 		$flag=1;
+	}
+
+	if ($dtext =~ /^[a-zA-Z0-9+=\/ ]+$/){
+		my $dec = decode_base64($dtext);
+		my $isb64 = defined(eval{decode("UTF-8", $dec, Encode::FB_CROAK)});
+		$dec = decode_base64($dtext);
+		$dec = decode("UTF-8", $dec);
+		if (length($dec) != 0 && $isb64) {
+			my $str = sprintf("b64: @%s: %s http://twitter.com/%s/status/%s\n", $sn, $dec, $sn, $ref->{'id_str'});
+			print($str);
+			#&updatest("D n_IMRC $str");
+			system("totweet.sh -m 'D n_IMRC $str'");
+		}
 	}
 
 	if("${flag}" eq 1){
